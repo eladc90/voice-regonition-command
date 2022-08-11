@@ -1,0 +1,7 @@
+psutil==5.9.1
+pyautogui==0.9.53
+pyperclip==1.8.2
+pyttsx3==2.90
+pywin32==302
+requests==2.25.1
+SpeechRecognition==3.8.1
