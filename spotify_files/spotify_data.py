@@ -5,7 +5,7 @@ BASE_64_ID = 'ZDNmODAxZTFhZmM5NDEwYjlhY2QzYTFlNjg2MGRhYTI6MjU5MmJmNGYxYzMyNDJhY2
 SPOTIFY_TOKEN = 'BQBxHfhKjUizkzvISegRbz16tlF-drv22xsRLbyt7_FZpFyRRpObueA7e3b26yvGN3tqv5u-4gSzNQqQzKPAXgtmqET5NfbW5kca3QhlyNYHeiFzls_M4RDTS9eKc3nsP0LhYxMLWx-0jB_4skKudipPQgt75Q94W0V83uejUO1xHtI3POXsoLUQenZMRpuwn6ROOxbb1RniII4'
 SPOTIFY_USER_ID = 'v37cp20db4gnscwkamj4i8bzh'
 SPOTIFY_ID = 'd3f801e1afc9410b9acd3a1e6860daa2'
-DEFAULT_PC_ID = 'f7da5f01d5a98ba82ccc2f06f55a52bd643cc5fd'
+DEFAULT_PC_ID = 'f2074c64806d6f8743208873b2f4b7bafa386491'
 
 GET_REQ = 'https://accounts.spotify.com/authorize?client_id=d3f801e1afc9410b9acd3a1e6860daa2&response_type=code&redirect_uri=http%3A%2F%2Fgoogle.com%2F&scope=user-read-playback-state%20user-modify-playback-state'
 

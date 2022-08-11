@@ -1,4 +1,4 @@
-
+from runner import Voice_command_Runner
 
 """
     
@@ -86,31 +86,8 @@ commander for now and the command they can execute:
 
     
 def main():
-    apps = [text_commander(),       # use to write to file (maybe read sometimes in the future...)
-            Spotify_commander(),    # use to control spotify - for now -> next song, previous song, pause and stop (they are the same)
-            volume_commander(),     # use to control pc volume - for now -> volume up and down 
-            CMD_commander(),        # use to send CMD for practically every thing we want to do but for now only to open chrome
-            Google_commander()      # use to search in google site using chrome
-    ]
-    
-    listener = Mic_listener()
-    app_container = App_container()
-    text_file = text_commander()
-    for app in apps:
-        app.register_self(app_container)
-        
-    app_container.print_status()
-    
-    for text_command in listener.listen_loop():
-        print(text_command)
-        if text_command == 'stop':
-            break
-        if text_command.startswith('enable'):
-            app_to_enable = text_command.split('enable ')[1]
-            app_container.set_app_as_listener(app_to_enable)
-        logger.info(text_command)
-        app_container.dispatch_command(text_command)
-    
+    runner = Voice_command_Runner()
+    runner.Debug_run()
     
 if __name__ == '__main__':
     main()

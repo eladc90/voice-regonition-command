@@ -80,5 +80,3 @@ class Voice_command_Runner:
             print(ex)
         
     
-runner = Voice_command_Runner()
-runner.Debug_run()

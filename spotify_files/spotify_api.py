@@ -136,13 +136,20 @@ class Spotify_API:
     def _get_id(self):
         # TODO get the real id? 
         query = 'https://api.spotify.com/v1/me/player/devices'
-        response = requests.put(
+        response = requests.get(
         query,
         headers={
             "Authorization": f"Bearer {self.spotify_token}"
             }
         )
         print(response)
+        try:
+            devices_list = (response.json()['devices'])
+            for device in devices_list:
+                return (device['id'])
+        except Exception as ex:
+            print(ex)
+            
         if self.check_response_status(response) is False:
             return DEFAULT_PC_ID
         else:
