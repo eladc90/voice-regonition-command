@@ -13,3 +13,5 @@ class CMD_commander(App_command):
     def _open_chrome(self, command):
         command = 'start chrome'
         subprocess.Popen(command, shell=True)
+        
+        
