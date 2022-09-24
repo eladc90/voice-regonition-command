@@ -12,15 +12,10 @@ class App_container:
         
         
     def dispatch_command(self, command):
-        # TODO check if this is a better way
-        # for key, val in self.apps_dict.items():
-        #     if key in command:
-        #         val.register_as_listener()
-        
         for app in self.listen_app_list:
-            app.execute_command(command)
+            app.Get_command(command)
         
-        
+    
     def register_app(self, app, key, status):
         self.apps_dict[key] = app
         if status is True:

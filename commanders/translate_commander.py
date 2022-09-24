@@ -4,7 +4,7 @@ import subprocess
 
 
 class translate_commander(App_command):
-    def __init__(self, app_status=True, app_key='text'):
+    def __init__(self, app_status=True, app_key='translate'):
         super().__init__(app_status, app_key)
         self.command_dict = {
             'morfix':           self._translate_with_morfix,

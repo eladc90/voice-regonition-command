@@ -80,9 +80,19 @@ class App_command:
         return self.app_key
     
     
+    def Get_command(self, command):
+        self.execute_command(command)
+        
+        
     def execute_command(self, command):
+        is_command_work = False
         for key, val in self.command_dict.items():
-            if key in command:
+            if key == command:
                 val(command)
+                is_command_work = True
+        if is_command_work is False:
+            for key, val in self.command_dict.items():
+                if key in command:
+                    val(command)
     
     

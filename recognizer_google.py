@@ -4,14 +4,19 @@ from threading import Thread
 import speech_recognition 
 import pyttsx3
 import queue
+import whisper
+
 
 class Mic_listener:
     def __init__(self):
         self.recognizer = speech_recognition.Recognizer()
         self._voice_command_queue = queue.Queue()
-    
+        self._whisper_model = whisper.load_model("base")
+        
+        
     def thread_func(self, recognizer, audio):
         try:
+            # language='iw-IL' Hebrew
             self._voice_command_queue.put(recognizer.recognize_google(audio))
         except speech_recognition.UnknownValueError:
             pass
@@ -37,23 +42,11 @@ class Mic_listener:
             m = speech_recognition.Microphone()
             with m as source:
                 r.adjust_for_ambient_noise(source)  
-            stop_listening = r.listen_in_background(m, callback, phrase_time_limit=4) 
+            stop_listening = r.listen_in_background(m, callback, phrase_time_limit=3) 
             while True:
                 text = self._voice_command_queue.get()
                 text = text.lower()
                 yield text
         except Exception as ex:
             print(ex)
-        # while True:
-        #     try:
-        #         with speech_recognition.Microphone() as mic:
-        #             self.recognizer.adjust_for_ambient_noise(mic, duration=1)
-        #             audio = self.recognizer.listen(mic, phrase_time_limit=5)
-        #             text = str(self.recognizer.recognize_google(audio))
-        #             text = text.lower()
-        #             yield text
-        #     except speech_recognition.UnknownValueError:
-        #         self.recognizer = speech_recognition.Recognizer()
-        #         continue
-    
 

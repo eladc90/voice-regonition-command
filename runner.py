@@ -42,12 +42,10 @@ class Voice_command_Runner:
         try:
             for text_command in self.listener.listen_loop():
                 print(text_command)
-                if text_command == 'stop':
-                    break
                 if text_command.startswith('enable'):
                     app_to_enable = text_command.split('enable ')[1]
                     self.app_container.set_app_as_listener(app_to_enable)
-                logger.info(text_command)
+                # logger.info(text_command)
                 self.app_container.dispatch_command(text_command)
         except Exception as ex:
             logger.exception(ex)

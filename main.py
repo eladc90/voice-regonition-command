@@ -88,6 +88,7 @@ commander for now and the command they can execute:
 def main():
     runner = Voice_command_Runner()
     runner.Run()
+    # runner.Debug_run()
     
 if __name__ == '__main__':
     main()

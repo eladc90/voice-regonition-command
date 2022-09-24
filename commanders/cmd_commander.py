@@ -1,6 +1,7 @@
 from .app_command import App_command
 import subprocess
 
+
 class CMD_commander(App_command):
     def __init__(self, app_status=False, app_key='command'):
         super().__init__(app_status, app_key)

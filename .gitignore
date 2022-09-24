@@ -1,2 +1,4 @@
 text_file.txt
 spotify_files/spotify_data.py
+__pycache__
+./__pycache__

@@ -12,17 +12,28 @@ class Spotify_commander(App_command):
         self._Spotify_API = Spotify_API()
         self.command_dict = {
             'next song':        self._next_song,
+            'next':             self._next_song,
             'previous song':    self._previous_song,
             'pause song':       self._pause_song,
             'play song':        self._play_song,
+            'play':             self._play_song,
             'stop song':        self._pause_song,
+            'stop':             self._pause_song,
             'close spotify':    self._close_spotify_app,
             'open spotify':     self._open_spotify_app,
-            'spotify look for': self._look_for_song
-            
+            'spotify look for': self._look_for_song,
+            'look for':         self._look_for_song, 
+            'luke for':         self._look_for_song, 
         }
+        self._prefix_command_list = ['spotify look for', 'look for', 'luke for']
         
+        
+    def Get_command(self, command):   
+        for key, val in self.command_dict.items():
+            if key == command and key not in self._prefix_command_list:
+                val(command)
                 
+          
     def _next_song(self, command):
         self._Spotify_API.next_song()
         
@@ -43,11 +54,15 @@ class Spotify_commander(App_command):
         command_prefix = None
         for key, val in self.command_dict.items():
             if val == self._look_for_song:
-                command_prefix = key
-                
-        if command_prefix is None:
+                if command.startswith(key):
+                    command_prefix = key
+                    break
+                    
+        if command_prefix is None or command_prefix == ' ':
             print('cant get song name')
-        song_name = command.replace(key, '') 
+        
+        song_name = command.replace(key, '').strip()
+        print(f"looking for {song_name}")
         self._Spotify_API.search_song(song_name)
       
       
