@@ -28,10 +28,10 @@ class Spotify_commander(App_command):
         self._prefix_command_list = ['spotify look for', 'look for', 'luke for']
         
         
-    def Get_command(self, command):   
-        for key, val in self.command_dict.items():
-            if key == command and key not in self._prefix_command_list:
-                val(command)
+    # def Get_command(self, command):   
+    #     for key, val in self.command_dict.items():
+    #         if key == command and key not in self._prefix_command_list:
+    #             val(command)
                 
           
     def _next_song(self, command):

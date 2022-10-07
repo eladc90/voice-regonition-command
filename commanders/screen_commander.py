@@ -36,7 +36,7 @@ class screen_commander(App_command):
     
         
     def _open_the_black_screen(self):
-        im = Image.open(r"./black_screen.jpg") 
+        im = Image.open(r"C:\Users\eladc\Desktop\VOR\voice-regonition-command\black_screen.jpg") 
         im.show() 
         time.sleep(1)
         pyautogui.press('f11') # full screen
