@@ -5,7 +5,9 @@ import speech_recognition
 import pyttsx3
 import queue
 import whisper
+import socket,os
 
+from common_data import HOST, PORT
 
 class Mic_listener:
     def __init__(self):
@@ -17,12 +19,44 @@ class Mic_listener:
     def thread_func(self, recognizer, audio):
         try:
             # language='iw-IL' Hebrew
+            print(audio)
             self._voice_command_queue.put(recognizer.recognize_google(audio))
         except speech_recognition.UnknownValueError:
             pass
         except speech_recognition.RequestError as e:
             # print("Could not request results from Google Speech Recognition service; {0}".format(e))
             pass
+        
+    def run_loop_app(self) -> None:
+        self.sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)  
+        self.sock.bind((HOST, PORT))  
+        
+        self.sock.listen(5)
+        # self._app_runner = Thread(target=self._app_loop)
+        
+        
+        
+        
+        # self._app_runner.start()
+        while True:  
+            print("in the loop")
+            connection,address = self.sock.accept()  
+            buff = connection.recv(1024)  
+            
+            self._voice_command_queue.put(str(buff.decode('utf-8')))
+            
+            
+            yield str(buff.decode('utf-8'))
+            connection.send(buff)    		
+            connection.close() 
+    def _app_loop(self) -> None:
+        while True:  
+            connection,address = self.sock.accept()  
+            buff = connection.recv(1024)  
+            self._voice_command_queue.put(str(buff))
+            print(buff)
+            connection.send(buff)    		
+            connection.close() 
         
             
     def listen_loop(self):
@@ -38,7 +72,9 @@ class Mic_listener:
             new_th.start()
             
         try:
+            
             r = speech_recognition.Recognizer()
+            
             m = speech_recognition.Microphone()
             with m as source:
                 r.adjust_for_ambient_noise(source)  

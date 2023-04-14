@@ -5,19 +5,19 @@ from app_container import App_container
 class App_command:
     def __init__(self, app_status=True, app_key=None, app_container=None):
         """the app command use to send command to app if get command from the voice recognition.
-        this class is an abstract class use to implement by avery new app.
+        this class is a base class use to implement by avery new app.
         
         the status variable made to indicate if the app command is on or off (True or False respectively).
         if the app is on class collect text command and try to execute command if possible.   
 
         Args:
-            app_status (bool, optional): App is off or on. Defaults to False.
+            app_status (bool, optional): App is off or on. Defaults to True.
             
-        abstract method to implement:
+            
             self.command_dict should contains the function to execute with their relative key (command) 
             that execute the function for example:
                 the key (command) of the next song function is 'next song' so when this command received 
-                the self.command_dict should contain the function. every executer function need to be from the following shape -> def name_of_function(self, command):
+                the self.command_dict should contain the functions. every executer function need to be from the following shape -> def name_of_function(self, command):
                 
                 example of full self.command_dict: 
                 
@@ -94,5 +94,10 @@ class App_command:
             for key, val in self.command_dict.items():
                 if key in command:
                     val(command)
+                    
+                    
+                    
+                    
+                    
     
     

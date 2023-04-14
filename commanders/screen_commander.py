@@ -42,10 +42,12 @@ class screen_commander(App_command):
         pyautogui.press('f11') # full screen
 
 
+
+
     def _close_screen(self, command):
-        if command == 'screen':
-            utils_functions.close_process("Microsoft.Photos.exe")
-            self.screen_state = False
+        utils_functions.close_process("Microsoft.Photos.exe")
+        self.screen_state = False
+        
         
 
 

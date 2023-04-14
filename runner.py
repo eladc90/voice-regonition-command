@@ -15,7 +15,7 @@ from common_base import *
 
 
 class Voice_command_Runner:
-    def __init__(self) -> None:
+    def __init__(self, micr=True) -> None:
         self.listener = Mic_listener()
         self.app_container = App_container()
         self.commanders_list = [text_commander(),    # use to write to file (maybe read sometimes in the future...)
@@ -31,11 +31,25 @@ class Voice_command_Runner:
         self.print_status()
         
         
+    def Run_phone_app(self) -> None:
+        try:
+            for text_command in self.listener.run_loop_app():
+                print(text_command)
+                if text_command.startswith('enable'):
+                    app_to_enable = text_command.split('enable ')[1]
+                    self.app_container.set_app_as_listener(app_to_enable)
+                self.app_container.dispatch_command(text_command)
+        except Exception as ex:
+            logger.exception(ex)
+            print(ex)
+        
+    
+        
     def print_status(self):
         self.app_container.print_status()
     
     
-    def Run(self):
+    def Run(self, is_real_mic = True):
         """loop voice command -> get command from listen loop and dispatch the command to
         relevance commanders. 
         """
